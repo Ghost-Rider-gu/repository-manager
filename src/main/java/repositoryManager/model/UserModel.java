@@ -2,12 +2,17 @@ package repositoryManager.model;
 
 import lombok.Data;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.List;
+import java.util.Collection;
 
 @Data
 @Entity
@@ -19,5 +24,9 @@ public class UserModel {
     private String name;
     private String password;
     private Boolean active;
-    private List<UserRoles> roles;
+
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Column(name = "roles", nullable = false)
+    private Collection<UserRoles> roles;
 }
