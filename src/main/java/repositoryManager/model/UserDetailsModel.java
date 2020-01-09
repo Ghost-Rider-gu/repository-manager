@@ -5,8 +5,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class UserDetailsModel implements UserDetails {
     private String userName;
@@ -18,10 +18,7 @@ public class UserDetailsModel implements UserDetails {
         this.userName = user.getName();
         this.userPassword = user.getPassword();
         this.userActive = user.getActive();
-        this.authorities = user.getRoles()
-                .stream()
-                .map(role -> new SimpleGrantedAuthority(role.name()))
-                .collect(Collectors.toList());
+        this.authorities = Collections.singletonList(new SimpleGrantedAuthority(user.getRole().name()));
     }
 
     @Override
