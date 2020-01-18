@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Repository Manager Auth</title>
 </head>
 <body>
-
+    <div>
+        <form name="rm_auth" th:action="@{/login}" method="post">
+            <div th:if="${param.error}">
+                Invalid password or user name
+            </div>
+            <div th:if="${param.logout}">
+                You have been log out
+            </div>
+            <input type="text" id="username" name="username" />
+            <input type="password" id="password" name="password"/>
+            <button type="submit">Log in</button>
+        </form>
+    </div>
 </body>
 </html>

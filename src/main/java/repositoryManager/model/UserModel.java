@@ -10,12 +10,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Data
 @Entity
 @Table(name = "users")
 public class UserModel implements Serializable {
+
     private static final long serialVersionUID = 136067348552556409L;
 
     @Id
@@ -23,9 +26,13 @@ public class UserModel implements Serializable {
     @Column(name = "id", nullable = false, unique = true)
     private Long id;
 
+    @NotNull
+    @Size(min = 3, message = "Name cannot contains less than 3 letters")
     @Column(name = "name", nullable = false)
     private String name;
 
+    @NotNull
+    @Size(min = 6, message = "Password must have at least 6 characters")
     @Column(name = "password", nullable = false)
     private String password;
 
